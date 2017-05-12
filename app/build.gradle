@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+
+android {
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    useLibrary 'org.apache.http.legacy'
+    defaultConfig {
+        applicationId "scau.edu.cn.notebook"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    }
+    repositories{
+        flatDir{
+            dirs 'libs' //就是你放aar的目录地址
+        }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    compile files('libs/universal-image-loader-1.8.6-with-sources.jar')
+
+    //2017.1.12
+
+    //bmob-push：Bmob的推送包
+    //bmob-im：Bmob的即时通讯包，注意每个版本的im依赖特定版本的bmob-sdk，具体的依赖关系可查看下面注释[2]
+    //bmob-sms ：Bmob单独为短信服务提供的包
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    //将SQLBrite引入到我们的项目中
+    //在处理线程问题时，由于要使用到RxAndorid中相关的类，所以我们还要引入RxAndroid
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+   /* compile 'cn.bmob.android:bmob-sdk:3.5.1'
+    compile 'cn.bmob.android:bmob-push:0.8'
+    compile 'cn.bmob.android:bmob-im:2.0.5@aar'
+    compile 'cn.bmob.android:bmob-sms:1.0.1'*/
+    compile 'cn.bmob.android:http-legacy:1.0'
+    compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
+
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'io.reactivex:rxandroid:1.1.0'
+
+    compile files('libs/MobCommons-2016.0714.1402.jar')
+    compile files('libs/MobTools-2016.0714.1402.jar')
+    compile name: 'SMSSDK-2.1.1', ext: 'aar'
+    compile name: 'SMSSDKGUI-2.1.1', ext: 'aar'
+    compile files('libs/Bmob_Push_V0.9beta_20160520.jar')
+    compile files('libs/BmobSDK_V3.4.7_0518.jar')
+    compile files('libs/eventbus-2.4.0.jar')
+
+    compile 'me.iwf.photopicker:PhotoPicker:0.1.8'
+
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    testCompile 'junit:junit:4.12'
+    compile project(path: ':xListView')
+
+    compile 'com.google.code.gson:gson:2.7'
+
+    compile 'joda-time:joda-time:2.9.4'
+
+    compile 'com.yancy.imageselector:imageselector:1.3.0'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.3.0'
+    compile 'com.commit451:PhotoView:1.2.4'
+    compile 'com.android.support:appcompat-v7:23.+'
+    compile 'com.larswerkman:HoloColorPicker:1.5'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.3@aar') {
+        transitive = true
+    }
+}
